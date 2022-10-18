@@ -2,6 +2,8 @@ from tkinter import Tk
 from tkinter import *
 from tkinter.ttk import Progressbar
 from pygame import mixer
+from tkinter import filedialog
+import os
 
 root = Tk()
 
@@ -17,6 +19,12 @@ def play():
 def stop():
     mixer.music.pause()
 
+def select():
+    directory = os.getcwd()
+    filename = filedialog.askopenfilename(initialdir= directory, title="Select a File",
+                                          filetypes=(("Music files", "*.mp3 .wav*"), ("all files", "*.*")),
+                                          initialfile = "Untitled")
+
 pb = Progressbar(root, orient='horizontal', mode='indeterminate',length=280)
 pb.pack()
 
@@ -27,7 +35,8 @@ def resume():
     pb['value'] += seconds
     mixer.music.unpause()
 
-
+select1 = Button(root , text = "select" , command = select)
+select1.pack()
 
 button = Button(root , text = "play" , command= play)
 button.pack()
