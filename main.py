@@ -8,10 +8,12 @@ import os
 root = Tk()
 
 mixer.init()
-mixer.music.load("C:/Users/panos/Downloads/disturbed.mp3")
+test1 = open("test.txt","r+")
+print(test1)
 
 def play(name):
     mixer.music.load(name)
+    print(name)
     mixer.music.play()
     pb.start
 
@@ -22,7 +24,10 @@ def select():
     directory = os.getcwd()
     filename = filedialog.askopenfilename(initialdir= directory, title="Select a File",filetypes=(("Music files", "*.mp3 .wav*"), ("all files", "*.*")),initialfile = "Untitled")
     play(filename)
-pb = Progressbar(root, orient='horizontal', mode='indeterminate',length=280)
+    file = open("test.txt","w+")
+    file.write(filename)
+    file.close()
+pb = Progressbar(root, orient='horizontal', mode='indeterminate',length=28)
 pb.pack()
 
 def resume():
