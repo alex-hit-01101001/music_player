@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/music_player.iml" filepath="$PROJECT_DIR$/.idea/music_player.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../FileExplorer-V2/.idea/pythonProject.iml" filepath="$PROJECT_DIR$/../../FileExplorer-V2/.idea/pythonProject.iml" />
     </modules>
   </component>
 </project>
