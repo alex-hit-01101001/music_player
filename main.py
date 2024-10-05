@@ -13,14 +13,14 @@ def main(page: ft.Page):
 
     # Progress bar to indicate music playback
     progress_bar = ft.ProgressBar(width=400, value=0)
-
+    t = ft.Text("Music Title")
     # Centered layout
     container = ft.Container(
         content=ft.Column(
             [
                 ft.ListTile(
                     leading=ft.Icon(ft.icons.ALBUM),
-                    title=ft.Text("Music Title"),
+                    title= t,
                     subtitle=ft.Text("Music Subtitle"),
                 ),
                 ft.Row(
@@ -68,6 +68,7 @@ def main(page: ft.Page):
                 mixer.music.load(file_path)  # Load the selected file
                 mixer.music.play()  # Play the loaded music
                 self.selected_files.update()
+                self.update_progress_bar(file_path)
 
                 # Get the length of the audio file in seconds
                 audio_length = self.get_audio_length(file_path)
@@ -83,12 +84,14 @@ def main(page: ft.Page):
         def get_audio_length(self, file_path):
             # This function assumes the file exists and is an mp3
             if os.path.exists(file_path):
+                print(mixer.Sound(file_path).get_length())
                 return mixer.Sound(file_path).get_length()  # Get length in seconds
             return 0
 
-        def update_progress_bar(self):
+        def update_progress_bar(self , file_path):
             while mixer.music.get_busy():
-                position = mixer.music.get_pos() / 1000  # Get position in seconds
+                t.value = file_path
+                position = mixer.music.get_pos() / 1000000  # Get position in seconds
                 progress_bar.value = position  # Update progress bar with the current position
                 page.update()  # Update the page
                 time.sleep(1)  # Update every second
